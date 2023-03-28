@@ -11,7 +11,7 @@
 
 #########################################################################
 
-from profiles import ftot
+from SatGen.profiles import ftot
 
 import numpy as np
 from scipy.integrate import ode

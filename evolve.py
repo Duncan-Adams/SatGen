@@ -6,9 +6,9 @@
 
 #########################################################################
 
-import config as cfg
-import cosmo as co
-import profiles as pr
+import SatGen.config as cfg
+import SatGen.cosmo as co
+import SatGen.profiles as pr
 
 import numpy as np
 from scipy.interpolate import interp1d,interp2d

@@ -13,10 +13,12 @@
 
 #########################################################################
 
-import cosmo as co
+import SatGen.cosmo as co
 
 import numpy as np
 from scipy.interpolate import interp1d, RectBivariateSpline, splrep
+
+import os
 
 ########################## user control #################################
 
@@ -187,9 +189,15 @@ gvdb_fp = np.array([ 3.37821658e-01, -2.21730464e-04,  1.56793984e-01,
 print('>>> Building interpolation grid for Green+19 M(<r|f_b,c)...')
 print('>>> Building interpolation grid for Green+19 sigma(r|f_b,c)...')
 print('>>> Building interpolation grid for Green+19 d2Phidr2(r|f_b,c)...')
-gvdb_mm = np.load('etc/gvdb_mm.npy')
-gvdb_sm = np.load('etc/gvdb_sm.npy')
-gvdb_pm = np.load('etc/gvdb_pm.npy')
+
+current_fname = os.path.abspath(__file__)
+last_slash = current_fname.rfind('/')
+
+data_dir = current_fname[:last_slash + 1] + '/etc/'
+
+gvdb_mm = np.load(data_dir + 'gvdb_mm.npy')
+gvdb_sm = np.load(data_dir + 'gvdb_sm.npy')
+gvdb_pm = np.load(data_dir + 'gvdb_pm.npy')
 nfb = 100
 nr = 131
 ncs = 30
@@ -233,7 +241,7 @@ print('>>> Building interpolator for Jiang+15 orbit sampler...')
 ncdf_pts = 100
 V_by_V200c_arr = np.linspace(0., 2.6, ncdf_pts)
 Vr_by_V_arr = np.linspace(0., 1., ncdf_pts)
-jiang_cdfs = np.load('etc/jiang_cdfs.npz')
+jiang_cdfs = np.load(data_dir + 'jiang_cdfs.npz')
 V_by_V200c_cdf = jiang_cdfs['V_by_V200c']
 Vr_by_V_cdf = jiang_cdfs['Vr_by_V']
 

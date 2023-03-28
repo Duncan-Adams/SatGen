@@ -8,10 +8,10 @@
 
 import numpy as np
 
-import config as cfg
-import aux
-import profiles as pr
-import cosmo as co
+import SatGen.config as cfg
+import SatGen.aux as aux
+import SatGen.profiles as pr
+import SatGen.cosmo as co
 
 from lmfit import minimize, Parameters
 

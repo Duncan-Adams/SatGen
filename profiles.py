@@ -22,8 +22,8 @@
 
 #########################################################################
 
-import config as cfg # for global variables
-import cosmo as co # for cosmology related functions
+import SatGen.config as cfg # for global variables
+import SatGen.cosmo as co # for cosmology related functions
 import warnings
 
 import numpy as np

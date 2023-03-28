@@ -7,7 +7,7 @@
 
 #########################################################################
 
-import config as cfg
+import SatGen.config as cfg
 
 import numpy as np
 from scipy.integrate import quad

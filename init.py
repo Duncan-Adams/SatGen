@@ -8,10 +8,10 @@
 import numpy as np
 import sys
 
-import config as cfg
-import cosmo as co
-import galhalo as gh
-import aux as aux
+import SatGen.config as cfg
+import SatGen.cosmo as co
+import SatGen.galhalo as gh
+import SatGen.aux as aux
 
 from scipy.stats import lognorm, expon
 from scipy.interpolate import splrep, splev
