@@ -170,8 +170,7 @@ tsample = co.t(zsample,h,Om,OL)
 Dvsample = co.DeltaBN(zsample,Om,OL)
 Omsample = co.Omega(zsample,Om,OL)
 Nz = len(zsample)
-#print('    Number of output redshifts = %4i, up to z = %5.2f'\
-    %(Nz,zsample.max()))
+#print('    Number of output redshifts = %4i, up to z = %5.2f' %(Nz,zsample.max()))
     
 #print('>>> Tabulating Parkinson+08 J(u_res) ...')
 ures_grid = np.logspace(-6.,6.,1000)
