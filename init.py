@@ -614,6 +614,13 @@ def ZZLi2020(hp, Msub, z, sample_unbound=True):
     else:
         cum = np.random.uniform(0.0, 0.9999) # cut right below 1, avoids 1-cos2t>1
         one_minus_cos2t = (-1. / eta) * np.log(1. - cum*(1. - np.exp(-eta)))
+
+    if one_minus_cos2t > 1.0:
+        print()
+        print(f'something bad happened:')
+        print(f'random number: {cum}')
+        print(f'eta {eta}')
+        exit()
     theta = np.arccos(np.sqrt(1. - one_minus_cos2t))
 
     # TODO: Can change above to repeat if it yields a NaN theta, but this is quite rare

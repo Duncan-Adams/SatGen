@@ -426,7 +426,7 @@ def add_cyl_vecs(xv1, xv2):
     """
     R1, phi1, z1, VR1, Vphi1, Vz1 = xv1
     R2, phi2, z2, VR2, Vphi2, Vz2 = xv2
-    xvnew = np.zeros(6)
+    xvnew = np.zeros(xv1.shape)
     xvnew[2] = z1 + z2 # z add directly
     xvnew[5] = Vz1 + Vz2
     xnew = R1*np.cos(phi1) + R2*np.cos(phi2)
