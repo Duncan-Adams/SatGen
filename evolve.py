@@ -394,6 +394,29 @@ def lt_King62_RHS(potential,xv):
     rho = pr.rho(potential,r)
     dlnMdlnr = cfg.FourPi * r**3 * rho / M
     return (M / r**3) * (2.+Om**2.*r**3/cfg.G/M - dlnMdlnr)
+
+def lt_King62_RHS_axi(potenital, xv):
+    """
+    Auxiliary function for 'ltidal', which returns the right-hand side
+    of the King62 equation for tidal radius, as in eq.(12.21) of 
+    Mo, van den Bosch, White 10, but inverted and with all subhalo
+    terms on left-hand side. Modified to work for axisymetric potentials
+    
+    Syntax:
+    
+        lt_King62_RHS(potential,xv)
+    
+    where
+    
+        potential: host potential (a density profile object, or a list of
+            such objects that constitute a composite potential)
+        xv: phase-space coordinates [R,phi,z,VR,Vphi,Vz] in units of 
+            [kpc,radian,kpc,kpc/Gyr,kpc/Gyr,kpc/Gyr] (float array)
+    """
+    Om = Omega(xv)
+    d2Phi = pr.d2Phidr2(potential, xv[0], xv[2]) # feed in r and z separately
+    return (Om**2 - d2Phi)/cfg.G
+
 def Findlt(l,sp,rhs):
     """
     Auxiliary function for 'ltidal', which returns the 

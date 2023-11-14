@@ -188,10 +188,6 @@ def loop(itree):
                 sp = NFW(Msample[0],c2[0],Delta=cfg.Dvsample[iz[0]],z=zsample[0])
                 xv = init.orbit_from_Jiang2015(hp,sp,zsample[0])
         
-        # <<< test
-        #print('    id=%6i,k=%2i,z[0]=%7.2f,log(M[0])=%7.2f,c=%7.2f,a=%7.2f,c2=%7.2f,log(Ms)=%7.2f,Re=%7.2f,xv=%7.2f,%7.2f,%7.2f,%7.2f,%7.2f,%7.2f'%\
-        #    (id,k,z[0],np.log10(M[0]),c[0],a[0],c2[0],np.log10(Ms),Re, xv[0],xv[1],xv[2],xv[3],xv[4],xv[5]))
-        
         # update the arrays for output
         mass[id,iz] = Msample
         order[id,iz] = k

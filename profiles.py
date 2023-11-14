@@ -2663,7 +2663,7 @@ class Green(object):
             at radius r=sqrt(R^2+r^2)
     
     HISTORY: Sheridan Beckwith Green (2020-04, Yale)
-    """
+    """ 
     def __init__(self,Mi,c,Delta=200.,z=0.):
         """
         Initialize Green profile.
@@ -3909,3 +3909,37 @@ def Miso(r,rho):
     rhoave = np.append(rho[0],0.5*(rho[1:]+rho[:-1]))
     dM = cfg.FourPi * r**2 *dr * rhoave
     return dM.cumsum()
+
+
+def get_Sigma_Rmax(profile):
+    rmax = profile.rh
+    # rmax = profile.rte()
+    r_range = np.geomspace(1e-3*rmax, 1*rmax, 100)
+    sig_arr = []
+
+    for r in r_range:
+        sig_arr.append(profile.sigma(r))
+
+    rcid = np.argmax(sig_arr)
+    
+    R_max = r_range[rcid]   
+    sigma_max = sig_arr[rcid]
+    
+    return sigma_max, R_max
+    
+def get_Vmax_Rmax_Green(profile):
+    r_end = profile.rh
+    r_range = np.geomspace(1e-3*r_end, 1*r_end, 100)
+    Vcirc_arr = profile.Vcirc(r_range)
+
+    rcid = np.argmax(Vcirc_arr)
+    
+    R_max = r_range[rcid]   
+    V_max = Vcirc_arr[rcid]
+
+    return V_max, R_max
+
+def get_Vmax_Rmax_NFW(profile):
+    return profile.Vmax, profile.rmax
+
+
