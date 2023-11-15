@@ -564,6 +564,6 @@ def find_rsd(pHalo_DMonly, pHalo, pDisk, r_s):
     lhs = lambda r: pHalo.M(r) + pDisk.M(r) - pHalo_DMonly.M(r_s)
 
     #fairly confident rs_d <= r_s, but not sure about a robust lower bound
-    rsd = opt.brentq(lhs, 1e-1*r_s, r_s)
+    rsd = brentq(lhs, 1e-1*r_s, r_s)
 
     return rsd
