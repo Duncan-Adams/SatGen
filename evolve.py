@@ -388,31 +388,6 @@ def lt_King62_RHS(potential,xv):
         xv: phase-space coordinates [R,phi,z,VR,Vphi,Vz] in units of 
             [kpc,radian,kpc,kpc/Gyr,kpc/Gyr,kpc/Gyr] (float array)
     """
-    r = np.sqrt(xv[0]**2.+xv[2]**2.)
-    Om = Omega(xv)
-    M = pr.M(potential,r)
-    rho = pr.rho(potential,r)
-    dlnMdlnr = cfg.FourPi * r**3 * rho / M
-    return (M / r**3) * (2.+Om**2.*r**3/cfg.G/M - dlnMdlnr)
-
-def lt_King62_RHS_axi(potenital, xv):
-    """
-    Auxiliary function for 'ltidal', which returns the right-hand side
-    of the King62 equation for tidal radius, as in eq.(12.21) of 
-    Mo, van den Bosch, White 10, but inverted and with all subhalo
-    terms on left-hand side. Modified to work for axisymetric potentials
-    
-    Syntax:
-    
-        lt_King62_RHS(potential,xv)
-    
-    where
-    
-        potential: host potential (a density profile object, or a list of
-            such objects that constitute a composite potential)
-        xv: phase-space coordinates [R,phi,z,VR,Vphi,Vz] in units of 
-            [kpc,radian,kpc,kpc/Gyr,kpc/Gyr,kpc/Gyr] (float array)
-    """
     Om = Omega(xv)
     d2Phi = pr.d2Phidr2(potential, xv[0], xv[2]) # feed in r and z separately
     return (Om**2 - d2Phi)/cfg.G
@@ -572,3 +547,23 @@ def Findlrp(l,sg,sp,gpotential,xv,kappa):
     V = np.sqrt(xv[3]**2. + xv[4]**2. + xv[5]**2.)
     rho = pr.rho(gpotential,xv[0],xv[2])
     return  kappa*cfg.G*sp.M(l)*sg.rho(l)/l - rho*V**2
+
+
+def find_rsd(pHalo_DMonly, pHalo, pDisk, r_s):
+    """
+    Find rsd, the radius of the halo+disk potential that encloses the same amount of mass 
+    as r_s does in a halo only with the same total mass
+
+    pHalo_DMonly: host potential with just a dark matter halo
+    pHalo: dark matter halo potential in halo + disk model
+    pDisk: disk potential in halo + disk model
+    r_s: the scale radius of pHalo_DMonly
+    """
+
+    #enclosed disk + halo mass minus mass enclose of halo-only @ r_s
+    lhs = lambda r: pHalo.M(r) + pDisk.M(r) - pHalo_DMonly.M(r_s)
+
+    #fairly confident rs_d <= r_s, but not sure about a robust lower bound
+    rsd = opt.brentq(lhs, 1e-1*r_s, r_s)
+
+    return rsd
