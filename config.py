@@ -44,7 +44,8 @@ Mres = None # [Msun] [DEFAULT]: mass resolution of merger tree
            # (Mres/M0 = psi_{res})
 psi_res = 10**-5 # Resolution limit of merger tree
 z0 = 0. # [DEFAULT]: Typically changed in TreeGen_Sub
-zmax = 20.
+# zmax = 20.
+zmax = 40
 
 # Benson17 values
 #G0 = 0.6353 
