@@ -2849,10 +2849,10 @@ class Green(object):
             sys.exit("Invalid interpolation type specified!")
 
         if(r_by_rvir < cfg.rv_min):
-            warnings.warn("A radius value r/rvir=%.2e is smaller than the interpolator bound in %s!" % (r_by_rvir, type))
+            #warnings.warn("A radius value r/rvir=%.2e is smaller than the interpolator bound in %s!" % (r_by_rvir, type))
             r_by_rvir = cfg.rv_min
         elif(r_by_rvir > cfg.rv_max):
-            warnings.warn("A radius value r/rvir=%.2e is larger than the interpolator bound in %s!" % (r_by_rvir, type))
+            #warnings.warn("A radius value r/rvir=%.2e is larger than the interpolator bound in %s!" % (r_by_rvir, type))
             r_by_rvir = cfg.rv_max
         
         # determine which slices in r-space we lie between

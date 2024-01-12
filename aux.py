@@ -446,3 +446,28 @@ def add_cyl_vecs(xv1, xv2):
     xvnew[3] = VRnew
     xvnew[4] = Vphinew
     return xvnew
+    
+    
+def cyl_to_cart(xv):
+    """
+    Given a 6D position+velocity vectors in the cylindrical coordinate
+    system, convert it to cartesian
+    """
+    R, phi, z, VR, Vphi, Vz = xv
+    xvcart = np.zeros(xv.shape)
+
+    x = R*np.cos(phi)
+    y = R*np.sin(phi)
+
+    Vx = np.cos(phi)*VR - np.sin(phi)*Vphi
+    Vy = np.sin(phi)*VR + np.cos(phi)*Vphi
+    
+    xvcart[0] = x
+    xvcart[1] = y
+    xvcart[2] = z 
+    xvcart[3] = Vx
+    xvcart[4] = Vy
+    xvcart[5] = Vz
+    
+    return xvcart
+    
