@@ -564,6 +564,10 @@ def find_rsd(pHalo_DMonly, pHalo, pDisk, r_s):
     lhs = lambda r: pHalo.M(r) + pDisk.M(r) - pHalo_DMonly.M(r_s)
 
     #fairly confident rs_d <= r_s, but not sure about a robust lower bound
-    rsd = brentq(lhs, 1e-1*r_s, r_s)
+    try: 
+        rsd = brentq(lhs, 1e-1*r_s, r_s)
+    except:
+        print('no value of r_sd found . . .')
+        return r_s
 
     return rsd

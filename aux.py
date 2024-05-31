@@ -459,6 +459,7 @@ def cyl_to_cart(xv):
     x = R*np.cos(phi)
     y = R*np.sin(phi)
 
+	#vphi is already scaled to physical units in satgen!
     Vx = np.cos(phi)*VR - np.sin(phi)*Vphi
     Vy = np.sin(phi)*VR + np.cos(phi)*Vphi
     
