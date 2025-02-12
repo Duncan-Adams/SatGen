@@ -690,6 +690,7 @@ def dW():
     dW1 = 0.1 * cfg.Root2 * np.sqrt(cfg.Sh-cfg.S0)
     dW2 = 0.1 / cfg.NupperOverdW
     return min(dW1,dW2)
+    
 def NupperOverdW():
     """
     The integral used to determine the timestep, dW, i.e.,
