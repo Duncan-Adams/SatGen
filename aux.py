@@ -447,6 +447,52 @@ def add_cyl_vecs(xv1, xv2):
     xvnew[4] = Vphinew
     return xvnew
     
+def minus_cyl_vec(xv):
+    """
+    Given one 6D position+velocity vector in the cylindrical coordinate
+    system, computes its additive inverse
+    
+    Syntax:
+        
+        minus_cyl_vec(xv)
+        
+    where
+    
+        xv1: 6D position+velocity vector (float array of length 6)
+
+    Return:
+     
+        xvnew: the additive inverse of xv
+    """
+    
+    R, phi, z, VR, Vphi, Vz = xv
+    
+    xvnew = np.zeros(xv.shape)
+    
+    Rnew = R
+    phinew = phi + np.pi - 2*np.pi*np.heaviside(phi, 1.0) #since phi goes from (-pi, pi) we need to add pi if phi is less than zero or subtract pi is phi is greater than zero    
+    znew = -z
+    
+    
+    Vx = np.cos(phi)*VR - np.sin(phi)*Vphi
+    Vy = np.sin(phi)*VR + np.cos(phi)*Vphi
+
+    Vxnew = -Vx
+    Vynew = -Vy
+    
+    VRnew = np.cos(phinew)*Vxnew + np.sin(phinew)*Vynew
+    Vphinew = -np.sin(phinew)*Vxnew + np.cos(phinew)*Vynew
+    Vznew  = -Vz
+    
+    xvnew[0] = Rnew
+    xvnew[1] = phinew
+    xvnew[2] = znew
+    xvnew[3] = VRnew
+    xvnew[4] = Vphinew
+    xvnew[5] = Vznew
+    
+    return xvnew
+    
     
 def cyl_to_cart(xv):
     """
@@ -459,7 +505,7 @@ def cyl_to_cart(xv):
     x = R*np.cos(phi)
     y = R*np.sin(phi)
 
-	#vphi is already scaled to physical units in satgen!
+    #vphi is already scaled to physical units in satgen!
     Vx = np.cos(phi)*VR - np.sin(phi)*Vphi
     Vy = np.sin(phi)*VR + np.cos(phi)*Vphi
     
