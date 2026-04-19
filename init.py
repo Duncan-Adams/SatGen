@@ -386,6 +386,34 @@ def c2_fromMAH(Mv,t,version='zhao'):
     """
     return gh.c2_Zhao09(Mv,t,version)
     
+def c2_fromMAH_array(Mv,t,version='zhao'):
+    """
+    Returns the NFW concentration, c_{-2}, given the halo mass 
+    assembly history (MAH), using the Zhao+09 formula. This uses the form that computes on an array that I added
+    
+    Syntax:
+        
+        c2_fromMAH(Mv,t,version)
+        
+    where
+    
+        Mv: main-branch mass history until the time of interest [M_sun]
+            (array)
+        t: the time series of the main-branch mass history (array of the
+            same length as Mv)
+        version: 'zhao' or 'vdb' for the different versions of the
+                 fitting function parameters (string)
+    
+    Note that we need Mv and t in reverse chronological order, i.e., in 
+    decreasing order, such that Mv[0] and t[0] are the instantaneous halo
+    mass and instantaneous cosmic time, respectively.
+    
+    Return:
+        
+        c_-2 (float)
+    """
+    return gh.c2_Zhao09_array(Mv,t,version)
+    
 #---for initializing orbit
 
 def orbit(hp,xc=1.0,eps=0.5):

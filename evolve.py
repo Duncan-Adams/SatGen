@@ -256,7 +256,7 @@ def alpha_from_c2(c2p, c2s):
     return 0.55 * ((c2s/c2p) / 2.)**(-1./3.)
 
 
-def msub(sp,potential,xv,dt,choice='King62',alpha=1.):
+def msub(sp,potential,xv,dt,choice='King62',alpha=1., verbose=False):
     """
     Evolve subhalo mass due to tidal stripping, by an amount of
     
@@ -338,6 +338,7 @@ def ltidal(sp,potential,xv,choice='King62'):
         rhs = lt_Tormen98_RHS(potential,xv)
     else: 
         sys.exit('Invalid choice of tidal radius type!')
+        
 
     fa = Findlt(a,sp,rhs)
     fb = Findlt(b,sp,rhs)
