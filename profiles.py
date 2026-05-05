@@ -3934,7 +3934,7 @@ def get_Vmax_Rmax_Green(profile):
 
     rcid = np.argmax(Vcirc_arr)
     
-    R_max = r_range[rcid]   
+    R_max = r_range[rcid]
     V_max = Vcirc_arr[rcid]
 
     return V_max, R_max
